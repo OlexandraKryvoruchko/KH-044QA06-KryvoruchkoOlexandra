@@ -19,17 +19,7 @@ public class Main {
         try {
             webDriver.manage().window().maximize();
             webDriver.manage().timeouts().implicitlyWait(9000, TimeUnit.MILLISECONDS);
-            webDriver.get("https://www.google.com/");
-
-            WebElement googleSearchElement = webDriver.findElement(By.cssSelector("input.gLFyf.gsfi"));
-
-            googleSearchElement.clear();
-            googleSearchElement.sendKeys("rozetka ua");
-            googleSearchElement.sendKeys(Keys.ENTER);
-
-            WebElement rozetkaElement = webDriver.findElement(By.cssSelector("div.yuRUbf a[href='https://rozetka.com.ua/']"));
-
-            rozetkaElement.click();
+            webDriver.get("https://rozetka.com.ua/");
 
             WebElement rozetkaSearchElement = webDriver.findElement(By.cssSelector("input.search-form__input"));
 
@@ -44,6 +34,7 @@ public class Main {
 
             WebElement buyButton = webDriver.findElement(By.cssSelector("app-buy-button.toOrder.ng-star-inserted"));
             buyButton.click();
+            webDriver.quit();
 
         } finally {
             webDriver.quit();
