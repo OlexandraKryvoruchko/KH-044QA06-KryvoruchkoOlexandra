@@ -1,11 +1,9 @@
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.rmi.UnexpectedException;
-import java.rmi.server.ExportException;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -22,7 +20,9 @@ public class AddToCart {
             String query = "macbook pro";
 
             By categoryResult = By.cssSelector("div ul.categories-filter__list.ng-star-inserted a");
-            By searchResult = By.cssSelector("div.layout.layout_with_sidebar ul li a.goods-tile__picture.ng-star-inserted");
+            By searchResult = By.cssSelector("ul li a.goods-tile__picture");
+            By addToCart = By.cssSelector("app-buy-button button.buy-button.button_color_green");
+            By paragraph = By.cssSelector("ul.product-statuses li p");
 
             WebElement rozetkaSearchElement = driver.findElement(By.cssSelector("input.search-form__input"));
             rozetkaSearchElement.clear();
@@ -42,7 +42,13 @@ public class AddToCart {
             List<WebElement> ulProduct = driver.findElements(searchResult);
             ulProduct.get(0).click();
 
-            WebElement buyButton = driver.findElement(By.cssSelector("app-buy-button.toOrder.ng-star-inserted"));
+            wait.until(ExpectedConditions.visibilityOfElementLocated(paragraph));
+            WebElement pInUl = driver.findElement(paragraph);
+            Actions action = new Actions(driver);
+            action.moveToElement(driver.findElement(paragraph)).perform();
+
+            wait.until(ExpectedConditions.elementToBeClickable(addToCart));
+            WebElement buyButton = driver.findElement(addToCart);
             buyButton.click();
 
             driver.quit();

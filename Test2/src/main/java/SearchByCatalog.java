@@ -17,11 +17,11 @@ public class SearchByCatalog {
             driver.manage().timeouts().implicitlyWait(3000, TimeUnit.MILLISECONDS);
             driver.get("https://rozetka.com.ua/");
 
-            By searchResult = By.cssSelector("section ul.catalog-grid.ng-star-inserted li a.goods-tile__heading.ng-star-inserted");
-            By monitorsCategory = By.cssSelector("div.menu__hidden-column.ng-star-inserted ul ul li a[href$='monitors/c80089/']");
-            By rozetkaSeller = By.cssSelector(" div.scrollbar__inner ul li a label[for='Rozetka']");
+            By searchResult = By.cssSelector("ul li a.goods-tile__heading");
+            By monitorsCategory = By.cssSelector("ul.menu__hidden-list.ng-star-inserted li a[href$='monitors/c80089/']");
+            By rozetkaSeller = By.cssSelector("a label[for='Rozetka']");
 
-            WebElement catalogue = driver.findElement(By.cssSelector("header button.button.button--medium.button--with-icon.menu__toggle.ng-star-inserted"));
+            WebElement catalogue = driver.findElement(By.cssSelector("button.button--medium.menu__toggle"));
             catalogue.click();
 
             WebDriverWait wait = new WebDriverWait (driver, 7);
